@@ -1,11 +1,6 @@
 package dev.bartosz.pretnik.todayidid.data.model
 
-import android.util.Log
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.forEach
-import kotlinx.coroutines.flow.last
 import java.time.LocalDate
 
 class ActivityRepository(private val activityDao: ActivityDao) {

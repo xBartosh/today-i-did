@@ -7,7 +7,6 @@ import dev.bartosz.pretnik.todayidid.data.model.Activity
 import dev.bartosz.pretnik.todayidid.data.model.ActivityRepository
 import dev.bartosz.pretnik.todayidid.data.model.AllTimeActivity
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit

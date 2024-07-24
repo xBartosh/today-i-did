@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.blue
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.CalendarConstraints
@@ -12,15 +11,12 @@ import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import dev.bartosz.pretnik.todayidid.MainActivity
-import dev.bartosz.pretnik.todayidid.databinding.FragmentTodayididBinding
 import dev.bartosz.pretnik.todayidid.data.model.Activity
-import java.sql.Time
-import java.time.Duration
+import dev.bartosz.pretnik.todayidid.databinding.FragmentTodayididBinding
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 
 class TodayIDidFragment : Fragment() {
     private lateinit var viewModel: TodayIDidViewModel

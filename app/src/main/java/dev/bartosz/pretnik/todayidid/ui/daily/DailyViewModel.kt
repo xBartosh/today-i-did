@@ -7,7 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dev.bartosz.pretnik.todayidid.data.model.Activity
 import dev.bartosz.pretnik.todayidid.data.model.ActivityRepository
-import dev.bartosz.pretnik.todayidid.ui.alltime.AllTimeActivityAdapter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
