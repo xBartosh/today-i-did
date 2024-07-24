@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_daily"
+        android:icon="@drawable/ic_daily_black_24dp"
+        android:title="@string/daily" />
+
+    <item
+        android:id="@+id/navigation_todayidid"
+        android:icon="@drawable/ic_todayidid_black_24dp"
+        android:title="@string/today_i_did" />
+
+    <item
+        android:id="@+id/navigation_alltime"
+        android:icon="@drawable/ic_alltime_black_24dp"
+        android:title="@string/all_time" />
+
+</menu>

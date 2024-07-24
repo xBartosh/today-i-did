@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Today I Did</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="what">what</string>
+    <string name="when">when</string>
+    <string name="today_i_did">Today I Did</string>
+    <string name="hours">hours</string>
+    <string name="minutes">minutes</string>
+    <string name="add">Add</string>
+    <string name="all_time">All time</string>
+    <string name="daily">Daily</string>
+    <string name="minutes_0">Minutes: 0</string>
+    <string name="_0">0</string>
+    <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
+    <string name="today">Today</string>
+</resources>
