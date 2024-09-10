@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.bartosz.pretnik.todayidid.data.model.AllTimeActivity
+import dev.bartosz.pretnik.todayidid.data.model.activity.AllTimeActivity
 import dev.bartosz.pretnik.todayidid.databinding.AlltimeItemActivityBinding
 import java.time.format.DateTimeFormatter
 import java.util.Locale

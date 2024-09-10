@@ -1,4 +1,4 @@
-package dev.bartosz.pretnik.todayidid.data.model
+package dev.bartosz.pretnik.todayidid.data.model.activity
 
 import java.time.LocalDate
 

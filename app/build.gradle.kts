@@ -10,9 +10,9 @@ android {
 
     defaultConfig {
         applicationId = "dev.bartosz.pretnik.todayidid"
-        minSdk = 26
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = 34
+        versionCode = 13
+        versionName = "3.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,7 +27,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -61,6 +62,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx.v283)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
     ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

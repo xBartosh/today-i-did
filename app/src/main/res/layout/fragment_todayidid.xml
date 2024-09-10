@@ -8,6 +8,25 @@
     android:padding="20dp"
     tools:context=".ui.todayidid.TodayIDidFragment">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/messageCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/messageText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceBody1" />
+
+    </com.google.android.material.card.MaterialCardView>
+
     <LinearLayout
         android:id="@+id/form"
         android:layout_width="match_parent"
@@ -52,14 +71,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/what"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/what"
                 android:layout_width="match_parent"
+                android:focusable="true"
+                android:clickable="true"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:completionThreshold="1"
+                android:padding="16dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

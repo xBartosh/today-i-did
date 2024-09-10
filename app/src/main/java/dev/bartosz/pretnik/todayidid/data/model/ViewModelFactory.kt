@@ -2,6 +2,7 @@ package dev.bartosz.pretnik.todayidid.data.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dev.bartosz.pretnik.todayidid.data.model.activity.ActivityRepository
 import dev.bartosz.pretnik.todayidid.ui.alltime.AllTimeViewModel
 import dev.bartosz.pretnik.todayidid.ui.daily.DailyViewModel
 import dev.bartosz.pretnik.todayidid.ui.todayidid.TodayIDidViewModel

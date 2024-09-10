@@ -2,8 +2,11 @@ package dev.bartosz.pretnik.todayidid.ui.todayidid
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.bartosz.pretnik.todayidid.data.model.Activity
-import dev.bartosz.pretnik.todayidid.data.model.ActivityRepository
+import dev.bartosz.pretnik.todayidid.data.model.activity.Activity
+import dev.bartosz.pretnik.todayidid.data.model.activity.ActivityRepository
+import dev.bartosz.pretnik.todayidid.data.model.activity.ActivitySummary
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class TodayIDidViewModel(private val repository: ActivityRepository) : ViewModel() {
@@ -31,6 +34,39 @@ class TodayIDidViewModel(private val repository: ActivityRepository) : ViewModel
     )
 
     val randomQuote = _timeQuotes.random()
+
+    private val _suggestions = MutableStateFlow<List<String>>(emptyList())
+    val suggestions: StateFlow<List<String>> = _suggestions
+
+    private var activitySummaries: List<ActivitySummary> = emptyList()
+
+    init {
+        viewModelScope.launch {
+            repository.getDistinctActivitiesOrderedByMinutes().collect { summaries ->
+                activitySummaries = summaries
+                updateSuggestions("")
+            }
+        }
+    }
+
+    fun updateSuggestions(query: String) {
+        viewModelScope.launch {
+            _suggestions.value = if (query.isEmpty()) {
+                activitySummaries
+                    .map { formatActivity(it) }
+                    .take(3)
+            } else {
+                activitySummaries
+                    .filter { it.what.contains(query, ignoreCase = true) }
+                    .map { formatActivity(it) }
+                    .take(5)
+            }
+        }
+    }
+
+    private fun formatActivity(activity: ActivitySummary): String {
+        return activity.what.lowercase().replaceFirstChar { it.uppercase() }
+    }
 
     fun addActivity(activity: Activity) {
         viewModelScope.launch {

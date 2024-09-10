@@ -16,4 +16,10 @@
     <string name="delete">Delete</string>
     <string name="remove">Remove</string>
     <string name="today">Today</string>
+    <string name="activity_added_successfully">Activity added successfully</string>
+    <string name="select_date">Select date</string>
+    <string name="track_your_first_activity_and_watch_your_progress_grow_over_time_every_step_counts">Track your first activity and watch your progress grow over time. Every step counts!</string>
+    <string name="add_your_first_activity">Add Your First Activity</string>
+    <string name="your_journey_starts_here">Your journey starts here!</string>
+    <string name="no_activities_added_for_this_day_yet">No activities added for this day yet.</string>
 </resources>

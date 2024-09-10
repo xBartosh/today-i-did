@@ -1,4 +1,4 @@
-package dev.bartosz.pretnik.todayidid.data.model
+package dev.bartosz.pretnik.todayidid.data.model.activity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

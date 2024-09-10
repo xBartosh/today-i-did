@@ -1,18 +1,26 @@
 package dev.bartosz.pretnik.todayidid.ui.todayidid
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.snackbar.Snackbar
 import dev.bartosz.pretnik.todayidid.MainActivity
-import dev.bartosz.pretnik.todayidid.data.model.Activity
+import dev.bartosz.pretnik.todayidid.data.model.activity.Activity
 import dev.bartosz.pretnik.todayidid.databinding.FragmentTodayididBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -38,6 +46,7 @@ class TodayIDidFragment : Fragment() {
         setupSubmitButton()
         setDefaultDate()
         setUpQuote()
+        setupSuggestions()
 
         return binding.root
     }
@@ -91,8 +100,8 @@ class TodayIDidFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val hours = hoursStr.toIntOrNull()?:0
-            val minutes = minutesStr.toIntOrNull()?:0
+            val hours = hoursStr.toIntOrNull() ?: 0
+            val minutes = minutesStr.toIntOrNull() ?: 0
             if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || (hours <= 0 && minutes <= 0)) {
                 showErrorMessage("Please enter valid hours and minutes")
                 return@setOnClickListener
@@ -107,17 +116,81 @@ class TodayIDidFragment : Fragment() {
         }
     }
 
+    private fun setupSuggestions() {
+        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, mutableListOf())
+        binding.what.setAdapter(adapter)
+
+        binding.what.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.updateSuggestions(s?.toString() ?: "")
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.suggestions.collectLatest { suggestions ->
+                adapter.clear()
+                adapter.addAll(suggestions)
+                adapter.notifyDataSetChanged()
+                if (suggestions.isNotEmpty()) {
+                    binding.what.showDropDown()
+                }
+            }
+        }
+
+        viewModel.updateSuggestions("")
+    }
+
     private fun showErrorMessage(message: String) {
-        Snackbar.make(binding.root, message, 500).show()
+        showMessage(message, true)
     }
 
     private fun showSuccessMessage() {
-        Snackbar.make(binding.root, "Activity added successfully", 500).show()
+        showMessage("Activity added successfully", false)
     }
 
+    private fun showMessage(message: String, isError: Boolean) {
+        val binding = _binding
+            ?: // The view has been destroyed, we can't show the message
+            return
+
+        val context = requireContext()
+        val typedValue = TypedValue()
+
+        binding.messageCard.apply {
+            visibility = View.VISIBLE
+            setCardBackgroundColor(
+                if (isError) {
+                    context.theme.resolveAttribute(com.google.android.material.R.attr.colorError, typedValue, true)
+                    typedValue.data
+                } else {
+                    context.theme.resolveAttribute(com.google.android.material.R.attr.colorPrimary, typedValue, true)
+                    typedValue.data
+                }
+            )
+        }
+        binding.messageText.apply {
+            text = message
+            setTextColor(
+                if (isError) {
+                    context.theme.resolveAttribute(com.google.android.material.R.attr.colorOnError, typedValue, true)
+                    typedValue.data
+                } else {
+                    context.theme.resolveAttribute(com.google.android.material.R.attr.colorOnPrimary, typedValue, true)
+                    typedValue.data
+                }
+            )
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            _binding?.messageCard?.visibility = View.GONE
+        }, 1000)
+    }
     private fun clearForm() {
         binding.what.text?.clear()
-        setDefaultDate()
         binding.hours.text?.clear()
         binding.minutes.text?.clear()
     }

@@ -3,9 +3,9 @@ package dev.bartosz.pretnik.todayidid.ui.alltime
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import dev.bartosz.pretnik.todayidid.data.model.Activity
-import dev.bartosz.pretnik.todayidid.data.model.ActivityRepository
-import dev.bartosz.pretnik.todayidid.data.model.AllTimeActivity
+import dev.bartosz.pretnik.todayidid.data.model.activity.Activity
+import dev.bartosz.pretnik.todayidid.data.model.activity.ActivityRepository
+import dev.bartosz.pretnik.todayidid.data.model.activity.AllTimeActivity
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
